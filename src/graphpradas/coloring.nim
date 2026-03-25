@@ -1,7 +1,7 @@
 ## coloring.nim -- Graph coloring as pradas problem.
 {.experimental: "strict_funcs".}
 import std/tables
-import lattice
+import basis/code/choice
 
 type
   ColoringProblem* = object
@@ -13,7 +13,7 @@ type
     assignment*: Table[int, int]  ## node -> color
     colors_used*: int
 
-  SolveFn* = proc(problem: ColoringProblem): Result[ColoringResult, BridgeError] {.raises: [].}
+  SolveFn* = proc(problem: ColoringProblem): Choice[ColoringResult] {.raises: [].}
 
 proc new_coloring*(num_nodes, num_colors: int, edges: seq[(int, int)]): ColoringProblem =
   ColoringProblem(num_nodes: num_nodes, num_colors: num_colors, edges: edges)
